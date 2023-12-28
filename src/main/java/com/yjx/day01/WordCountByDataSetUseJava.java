@@ -7,14 +7,10 @@ import org.apache.flink.api.java.operators.AggregateOperator;
 import org.apache.flink.api.java.operators.DataSource;
 import org.apache.flink.api.java.operators.FlatMapOperator;
 import org.apache.flink.api.java.operators.MapOperator;
-import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.api.java.tuple.Tuple2;
-import org.apache.flink.shaded.zookeeper3.org.apache.jute.CsvOutputArchive;
 import org.apache.flink.util.Collector;
 
-import java.util.Arrays;
-
-public class Hello01WordCountByDataSetUseJava {
+public class WordCountByDataSetUseJava {
     public static void main(String[] args) throws Exception {
         //创建环境
         ExecutionEnvironment environment = ExecutionEnvironment.getExecutionEnvironment();
