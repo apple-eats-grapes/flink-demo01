@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+
+<configuration>
+
+<!-- 设置执行 MapReduce 任务的运行时框架为 YARN -->
+<property>
+<name>mapreduce.framework.name</name>
+<value>yarn</value>
+</property>
+<!-- 设置 MapReduce JobHistory 服务器的地址 -->
+<property>
+<name>mapreduce.jobhistory.address</name>
+<value>node01:10020</value>
+</property>
+<!-- 设置 MapReduce JobHistory 服务器的 Web 地址 -->
+<property>
+<name>mapreduce.jobhistory.webapp.address</name>
+<value>node01:19888</value>
+</property>
+<!-- 设置已经运行完的 Hadoop 作业记录的存放路径（HDFS 文件系统中的目录），默认是
+     ${yarn.app.mapreduce.am.staging-dir}/history/done -->
+<property>
+<name>mapreduce.jobhistory.done-dir</name>
+<value>/history/done</value>
+</property>
+<!-- 设置正在运行中的 Hadoop 作业记录的存放路径（HDFS 文件系统中的目录），默认是
+     ${yarn.app.mapreduce.am.staging-dir}/history/done_intermediate -->
+<property>
+<name>mapreduce.jobhistory.intermediate-done-dir</name>
+<value>/history/done_intermediate</value>
+</property>
+<!-- 设置需要加载的 jar 包和环境配置 -->
+<property>
+<name>mapreduce.application.classpath</name>
+<value>
+/opt/yjx/hadoop-3.1.2/etc/hadoop,
+/opt/yjx/hadoop-3.1.2/share/hadoop/common/*,
+/opt/yjx/hadoop-3.1.2/share/hadoop/common/lib/*,
+/opt/yjx/hadoop-3.1.2/share/hadoop/hdfs/*,
+/opt/yjx/hadoop-3.1.2/share/hadoop/hdfs/lib/*,
+/opt/yjx/hadoop-3.1.2/share/hadoop/mapreduce/*,
+/opt/yjx/hadoop-3.1.2/share/hadoop/mapreduce/lib/*,
+/opt/yjx/hadoop-3.1.2/share/hadoop/yarn/*,
+/opt/yjx/hadoop-3.1.2/share/hadoop/yarn/lib/*
+</value>
+</property>
+</configuration>

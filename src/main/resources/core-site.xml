@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<!-- 设置 NameNode 节点的 URI(包括协议、主机名称、端口号)，用于 NameNode 与 DataNode 之间的通讯 -->
+<property>
+<name>fs.defaultFS</name>
+<value>hdfs://hdfs-yjx</value>
+</property>
+<!-- 设置 Hadoop 运行时临时文件的存放位置，比如 HDFS 的 NameNode 数据默认都存放这个目录下 -->
+<property>
+<name>hadoop.tmp.dir</name>
+<value>/var/yjx/hadoop/ha</value>
+</property>
+<!-- 设置在 Web 界面访问数据时使用的用户名 -->
+<property>
+<name>hadoop.http.staticuser.user</name>
+<value>root</value>
+</property>
+<!-- 设置 HA，需要一组 ZK 地址，以逗号分隔。被 ZKFailoverController 使用于自动失效备援 failover -->
+<property>
+<name>ha.zookeeper.quorum</name>
+<value>node01:2181,node02:2181,node03:2181</value>
+</property>
+<!-- 该参数表示可以通过 httpfs 接口访问 HDFS 的 IP 地址限制 -->
+<!-- 配置 root(超级用户) 允许通过代理访问的主机节点 -->
+<property>
+<name>hadoop.proxyuser.root.hosts</name>
+<value>*</value>
+</property>
+<!-- 通过 httpfs 接口访问的用户获得的群组身份 -->
+<!-- 配置 root(超级用户) 允许通过代理的用户所属组 -->
+<property>
+<name>hadoop.proxyuser.root.groups</name>
+<value>*</value>
+</property>
+</configuration>

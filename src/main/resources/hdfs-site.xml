@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<!-- 设置 nameservices 列表，逗号分隔。如果启动 federation 功能需要配置多个 -->
+<property>
+<name>dfs.nameservices</name>
+<value>hdfs-yjx</value>
+</property>
+<!-- 设置一个 NameNode 列表。hdfs-yjx 是指具体的 nameservice 名称，通常就是 dfs.nameservices 中配置的。值
+     是预备配置的 NameNode 的 ID，ID 是自己取的，不重复就可以，例如 nn1,nn2 -->
+<property>
+<name>dfs.ha.namenodes.hdfs-yjx</name>
+<value>nn1,nn2</value>
+</property>
+<!-- 设置 NameNode 的 RPC 地址和端口 -->
+<property>
+<name>dfs.namenode.rpc-address.hdfs-yjx.nn1</name>
+<value>node01:8020</value>
+</property>
+<!-- 设置 NameNode 的 RPC 地址和端口 -->
+<property>
+<name>dfs.namenode.rpc-address.hdfs-yjx.nn2</name>
+<value>node02:8020</value>
+</property>
+<!-- 设置 NameNode 的 HTTP 地址和端口 -->
+<property>
+<name>dfs.namenode.http-address.hdfs-yjx.nn1</name>
+<value>node01:9870</value>
+</property>
+<!-- 设置 NameNode 的 HTTP 地址和端口 -->
+<property>
+<name>dfs.namenode.http-address.hdfs-yjx.nn2</name>
+<value>node02:9870</value>
+</property>
+<!-- 设置 QJM 共享存储系统服务器。在多个 NameNode 中共享存储目录，用于存放 edits 文件，该目录由 Active 写，
+     Standby 读 -->
+<property>
+<name>dfs.namenode.shared.edits.dir</name>
+<value>qjournal://node01:8485;node02:8485;node03:8485/hdfs-yjx</value>
+</property>
+<!-- 设置 journalnode 用于存放 edits 日志的目录，默认值为 /tmp/hadoop/dfs/journalnode -->
+<property>
+<name>dfs.journalnode.edits.dir</name>
+<value>/var/yjx/hadoop/ha/qjm</value>
+</property>
+<!-- 设置客户端连接 Active NameNode 所用的代理类 -->
+<property>
+<name>dfs.client.failover.proxy.provider.hdfs-yjx</name>
+<value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+</property>
+<!-- 设置 HDFS-HA 功能的防脑裂方法。可以是内建的方法(例如 shell 和 sshfence)或者用户自定义的方法 -->
+<property>
+<name>dfs.ha.fencing.methods</name>
+<value>sshfence</value>
+<value>shell(true)</value>
+</property>
+<!-- 设置失效转移时使用的秘钥文件 -->
+<property>
+<name>dfs.ha.fencing.ssh.private-key-files</name>
+<value>/root/.ssh/id_rsa</value>
+</property>
+<!-- 设置故障转移功能是否开启，建议开启 -->
+<property>
+<name>dfs.ha.automatic-failover.enabled</name>
+<value>true</value>
+</property>
+<!-- 设置 HDFS 默认的数据块副本数。可以在创建文件时指定，如果创建时未指定，则使用默认值 -->
+<property>
+<name>dfs.replication</name>
+<value>2</value>
+</property>
+</configuration>
