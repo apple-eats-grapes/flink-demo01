@@ -1,2 +1,7 @@
 # 项目排除路径
 /target/
+
+/.idea
+/flink-demo.iml
+/flink-demo01.iml
+/*.log
